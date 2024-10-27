@@ -38,14 +38,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//カメラの位置を変える
 		CamerainputMove(deltatime);
 
-		////カメラの座標からマップの位置を更新
-		UpdateMapPos(GetCamera_X());
-
-		//カメラの座標を足したので元に戻す
-		CameraInitalize();
-
 		//マップの描画
-		DrawMap();
+		DrawMap(GetCamera_X());
 
 		prevtime = nowtime;
 	}
