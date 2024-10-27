@@ -59,35 +59,27 @@ void InitializeMap()
     }
 }
 
-void UpdateMapPos(int camera_X)
-{
-    //マップの座標にカメラの座標を足すことでマップを動かしていく
-    for (int iy = 0; iy < map.size(); iy++)
-    {
-        for (int ix = 0; ix < map[iy].size(); ix++)
-        {
-            mapPos[iy][ix].x += camera_X;
-        }
-    }
-}
-
-void DrawMap()
+void DrawMap(int camera_x)
 {
     for (int iy = 0; iy < map.size(); iy++)
     {
         for (int ix = 0; ix < map[iy].size(); ix++)
         {
+            Vector2D map_chip_pos = mapPos[iy][ix];
+            // マップチップの位置にカメラの位置を追加する
+            map_chip_pos.x += camera_x;
+            
             //マップチップの座標が画面内だった時
-            if (0 - MapChipSize <= mapPos[iy][ix].x && mapPos[iy][ix].x <= SCREEN_X)
+            if (0 - MapChipSize <= map_chip_pos.x && map_chip_pos.x <= SCREEN_X)
             {
                 //マップチップが0だった時はグレー、1だった時は白
                 if (map[iy][ix] == 0)
                 {
-                    DrawBox(mapPos[iy][ix].x, mapPos[iy][ix].y, mapPos[iy][ix].x + MapChipSize, mapPos[iy][ix].y + MapChipSize, GetColor(127, 127, 127), FALSE);
+                    DrawBox(map_chip_pos.x, map_chip_pos.y,map_chip_pos.x + MapChipSize, map_chip_pos.y + MapChipSize,GetColor(127, 127, 127), FALSE);
                 }
                 else
                 {
-                    DrawBox(mapPos[iy][ix].x, mapPos[iy][ix].y, mapPos[iy][ix].x + MapChipSize, mapPos[iy][ix].y + MapChipSize, GetColor(255, 255, 255), FALSE);
+                    DrawBox(map_chip_pos.x, map_chip_pos.y, map_chip_pos.x + MapChipSize, map_chip_pos.y + MapChipSize, GetColor(255, 255, 255), FALSE);
                 }
             }
         }
