@@ -9,4 +9,5 @@ void load_csvfile(std::string filepath);
 void InitializeMap();
 
 /// @brief マップの描画
+/// @param camera_X カメラのX座標
 void DrawMap(int camera_X);
